@@ -1,0 +1,42 @@
+﻿@model ASSIGNTMENT.Models.Food
+
+<h2 class="text-center mt-3">🍔 Chi tiết món ăn</h2>
+
+<div class="row justify-content-center mt-4">
+
+    <div class="col-md-6">
+        <div class="card shadow">
+
+            <img src="~/images/@Model.Image"
+                 class="card-img-top"
+                 style="height:300px; object-fit:cover;" />
+
+            <div class="card-body text-center">
+
+                <h3>@Model.Name</h3>
+
+                <p class="text-danger fw-bold fs-4">
+                    @Model.Price VNĐ
+                </p>
+
+                <p>@Model.Description</p>
+
+                <a asp-controller="Cart"
+                   asp-action="Add"
+                   asp-route-id="@Model.Id"
+                   class="btn btn-success">
+                    🛒 Thêm vào giỏ
+                </a>
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="btn btn-secondary">
+                    ⬅ Quay lại
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

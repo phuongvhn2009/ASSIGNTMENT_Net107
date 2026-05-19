@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ASSIGNTMENT.Models;
@@ -36,20 +35,42 @@ public class FoodsController : Controller
         return View(foods);
     }
 
+    public IActionResult SearchPage()
+    {
+        var foods = _context.Foods.ToList(); // load toàn bộ ban đầu
+        return View(foods);
+    }
+
+    [HttpGet]
+    public IActionResult Search(string name, decimal? minPrice, decimal? maxPrice, string category, string description)
+    {
+        var query = _context.Foods.AsQueryable();
+
+        if (!string.IsNullOrEmpty(name))
+            query = query.Where(x => x.Name.Contains(name));
+
+        if (minPrice.HasValue)
+            query = query.Where(x => x.Price >= minPrice);
+
+        if (maxPrice.HasValue)
+            query = query.Where(x => x.Price <= maxPrice);
+
+        if (!string.IsNullOrEmpty(category))
+            query = query.Where(x => x.Category != null && x.Category.Name != null && x.Category.Name.Contains(category));
+
+        if (!string.IsNullOrEmpty(description))
+            query = query.Where(x => x.Description.Contains(description));
+
+        return View("SearchPage", query.ToList());
+    }
+
     // GET: FOODS/Details/5
     public async Task<IActionResult> Details(int? id)
     {
-        if (id == null)
-        {
-            return NotFound();
-        }
+        var food = await _context.Foods.FirstOrDefaultAsync(x => x.Id == id);
 
-        var food = await _context.Foods
-            .FirstOrDefaultAsync(m => m.Id == id);
         if (food == null)
-        {
             return NotFound();
-        }
 
         return View(food);
     }
@@ -58,6 +79,17 @@ public class FoodsController : Controller
     public IActionResult Create()
     {
         return View();
+    }
+
+
+    public async Task<IActionResult> DetailsUser(int? id)
+    {
+        var food = await _context.Foods.FirstOrDefaultAsync(x => x.Id == id);
+
+        if (food == null)
+            return NotFound();
+
+        return View("DetailsUser", food);
     }
 
     // POST: FOODS/Create

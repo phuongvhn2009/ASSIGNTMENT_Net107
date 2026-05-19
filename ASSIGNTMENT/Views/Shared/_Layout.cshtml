@@ -41,6 +41,12 @@
                         <a class="nav-link" asp-controller="Cart" asp-action="Index">
                             🛒 Giỏ hàng
                         </a>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Foods" asp-action="SearchPage">
+                                🔍 Tìm kiếm
+                            </a>
+                        </li>
+
 
                         @if (Context.Session.GetInt32("UserId") == null)
                         {
