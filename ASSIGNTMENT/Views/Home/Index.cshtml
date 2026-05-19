@@ -1,0 +1,31 @@
+﻿@model List<ASSIGNTMENT.Models.Food>
+
+<h2 class="text-center mt-3">🍔 MENU MÓN ĂN</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card shadow">
+                <img src="~/images/@item.Image" class="card-img-top" style="height:200px; object-fit:cover;" />
+
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="text-danger fw-bold">@item.Price VNĐ</p>
+                    <p>@item.Description</p>
+
+                    <a asp-controller="Food" asp-action="Details" asp-route-id="@item.Id"
+                       class="btn btn-primary">
+                        Xem chi tiết
+                    </a>
+                    <a asp-controller="Cart"
+                       asp-action="Add"
+                       asp-route-id="@item.Id"
+                       class="btn btn-success">
+                        Thêm vào giỏ
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

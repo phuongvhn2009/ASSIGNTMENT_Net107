@@ -1,0 +1,28 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-link {
+    transition: 0.3s;
+}
+
+    .nav-link:hover {
+        color: #ffc107 !important;
+    }
+
+footer {
+    margin-top: 50px;
+}
+.card {
+    border-radius: 15px;
+}
+
+button {
+    border-radius: 10px;
+}

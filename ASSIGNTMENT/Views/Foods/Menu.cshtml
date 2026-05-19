@@ -1,0 +1,70 @@
+﻿@model List<ASSIGNTMENT.Models.Food>
+
+<style>
+    .menu-title {
+        font-size: 32px;
+        font-weight: bold;
+        color: #ff6600;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .food-card {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .food-img {
+        height: 180px;
+        object-fit: cover;
+    }
+</style>
+
+<h2 class="menu-title">🍔 MENU MÓN ĂN</h2>
+
+<div class="container">
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 col-sm-6">
+
+                <div class="card food-card mb-3">
+
+                    <!-- ẢNH -->
+                    <img src="~/images/@item.Image"
+                         class="card-img-top food-img" />
+
+                    <div class="card-body text-center">
+
+                        <!-- TÊN -->
+                        <h5 class="fw-bold">@item.Name</h5>
+
+                        <!-- GIÁ -->
+                        <p class="text-danger fw-bold">
+                            @item.Price VNĐ
+                        </p>
+
+                        <!-- NÚT GIỎ HÀNG -->
+                        <a asp-controller="Cart"
+                           asp-action="Add"
+                           asp-route-id="@item.Id"
+                           class="btn btn-success w-100">
+                            ➕ Thêm vào giỏ
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+</div>
